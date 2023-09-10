@@ -19,6 +19,10 @@ use biome_analyze::{
 };
 use biome_diagnostics::{category, Applicability, Diagnostic, DiagnosticExt, Severity};
 use biome_fs::RomePath;
+use biome_js_formatter::context::{
+    trailing_comma::TrailingComma, ArrowParentheses, QuoteProperties, QuoteStyle, Semicolons,
+};
+use biome_js_formatter::{context::JsFormatOptions, format_node};
 use biome_js_semantic::{semantic_model, SemanticModelOptions};
 use biome_js_syntax::{
     AnyJsRoot, JsFileSource, JsLanguage, JsSyntaxNode, TextRange, TextSize, TokenAtOffset,
@@ -31,10 +35,6 @@ use rome_js_analyze::utils::rename::{RenameError, RenameSymbolExtensions};
 use rome_js_analyze::{
     analyze, analyze_with_inspect_matcher, visit_registry, ControlFlowGraph, RuleError,
 };
-use rome_js_formatter::context::{
-    trailing_comma::TrailingComma, ArrowParentheses, QuoteProperties, QuoteStyle, Semicolons,
-};
-use rome_js_formatter::{context::JsFormatOptions, format_node};
 use rome_js_parser::JsParserOptions;
 use std::borrow::Cow;
 use std::ffi::OsStr;
@@ -578,7 +578,7 @@ fn format_range(
     let options = settings.format_options::<JsLanguage>(rome_path);
 
     let tree = parse.syntax();
-    let printed = rome_js_formatter::format_range(options, &tree, range)?;
+    let printed = biome_js_formatter::format_range(options, &tree, range)?;
     Ok(printed)
 }
 
@@ -614,7 +614,7 @@ fn format_on_type(
         None => panic!("found a token with no parent"),
     };
 
-    let printed = rome_js_formatter::format_sub_tree(options, &root_node)?;
+    let printed = biome_js_formatter::format_sub_tree(options, &root_node)?;
     Ok(printed)
 }
 

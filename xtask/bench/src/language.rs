@@ -1,12 +1,12 @@
 use crate::test_case::TestCase;
 use biome_analyze::{AnalysisFilter, AnalyzerOptions, ControlFlow, Never, RuleCategories};
+use biome_js_formatter::context::{JsFormatContext, JsFormatOptions};
 use biome_js_syntax::{AnyJsRoot, JsFileSource, JsSyntaxNode};
 use biome_parser::prelude::ParseDiagnostic;
 use biome_rowan::NodeCache;
 use criterion::black_box;
 use rome_formatter::{FormatResult, Formatted, PrintResult, Printed};
 use rome_js_analyze::analyze;
-use rome_js_formatter::context::{JsFormatContext, JsFormatOptions};
 use rome_js_parser::JsParserOptions;
 use rome_json_formatter::context::{JsonFormatContext, JsonFormatOptions};
 use rome_json_parser::JsonParserOptions;
@@ -100,7 +100,7 @@ impl FormatNode {
     pub fn format_node(&self) -> FormatResult<FormattedNode> {
         match self {
             Self::JavaScript(root, source_type) => {
-                rome_js_formatter::format_node(JsFormatOptions::new(*source_type), root)
+                biome_js_formatter::format_node(JsFormatOptions::new(*source_type), root)
                     .map(FormattedNode::JavaScript)
             }
             FormatNode::Json(root) => {

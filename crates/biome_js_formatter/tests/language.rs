@@ -1,14 +1,14 @@
+use biome_js_formatter::context::trailing_comma::TrailingComma;
+use biome_js_formatter::context::{
+    ArrowParentheses, JsFormatContext, JsFormatOptions, QuoteProperties, QuoteStyle, Semicolons,
+};
+use biome_js_formatter::{format_node, format_range, JsFormatLanguage};
 use biome_js_syntax::{JsFileSource, JsLanguage};
 use biome_parser::AnyParse;
 use biome_rowan::{FileSource, SyntaxNode};
 use biome_text_size::TextRange;
 use rome_formatter::{FormatContext, FormatResult, Formatted, IndentStyle, LineWidth, Printed};
 use rome_formatter_test::TestFormatLanguage;
-use rome_js_formatter::context::trailing_comma::TrailingComma;
-use rome_js_formatter::context::{
-    ArrowParentheses, JsFormatContext, JsFormatOptions, QuoteProperties, QuoteStyle, Semicolons,
-};
-use rome_js_formatter::{format_node, format_range, JsFormatLanguage};
 use rome_js_parser::{parse, JsParserOptions};
 use serde::{Deserialize, Serialize};
 

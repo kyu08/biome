@@ -135,7 +135,7 @@ impl LanguageKind {
 
     pub fn formatter_crate_name(&self) -> &'static str {
         match self {
-            LanguageKind::Js => "rome_js_formatter",
+            LanguageKind::Js => "biome_js_formatter",
             LanguageKind::Css => "rome_css_formatter",
             LanguageKind::Json => "rome_json_formatter",
         }
